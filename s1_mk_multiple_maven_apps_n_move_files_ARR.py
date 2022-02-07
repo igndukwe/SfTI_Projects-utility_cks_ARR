@@ -146,8 +146,8 @@ parser.add_argument(
 )
 
 parser.add_argument(
-    "-cscst",
-    "--checkstycompilersourcetarget", 
+    "-cst",
+    "--compilersourcetarget", 
     default="17",
     type=str,
     help="Enter the check style version"
@@ -156,7 +156,7 @@ parser.add_argument(
 
 parser.add_argument(
     "-cv",
-    "--checkstyleversion", 
+    "--puppyversion", 
     default="9.1",
     type=str,
     help="Enter the check style version"
@@ -196,14 +196,6 @@ parser.add_argument(
 )
 
 parser.add_argument(
-    "-cdp",
-    "--checkstylexmlchecksdestpath", 
-    default="",
-    type=str,
-    help="Enter the path to copy the checks file to. (if you do not want it to be in the root dir with the pom.xml)."
-)
-
-parser.add_argument(
      "-pt",
     "--pattern",
     default="",
@@ -229,8 +221,8 @@ pattern = args.pattern
 use_parent_dest_path = args.useparentdest
 parent_dest_path = args.parentdest
 child_dest_path = args.childdest
-checkstyle_compiler_source_tagret = args.checkstycompilersourcetarget
-checkstyle_version = args.checkstyleversion
+compiler_source_tagret = args.compilersourcetarget
+puppy_version = args.puppyversion
 maven_checkstyle_plugin_version = args.mavencheckstylepluginversion
 maven_checkstyle_plugin = args.mavencheckstyleplugin
 checkstyle_xml_checks = args.checkstylexmlchecks
@@ -287,8 +279,8 @@ def update_pom_xml(
     target = properties[2]
     
     # update the text
-    source.text = checkstyle_compiler_source_tagret #17
-    target.text = checkstyle_compiler_source_tagret #17
+    source.text = compiler_source_tagret #17
+    target.text = compiler_source_tagret #17
     
     ######### update the 'build' tag with the checkstyle requirements ##########
     # get the build
@@ -339,7 +331,7 @@ def update_pom_xml(
 
     # <build><pluginManagement><plugins><plugin><dependencies><dependency><version>
     version = dependency.makeelement('version', attrib)
-    version.text = checkstyle_version
+    version.text = puppy_version
     dependency.append(version)
 
     # <build><pluginManagement><plugins><plugin><executions>
